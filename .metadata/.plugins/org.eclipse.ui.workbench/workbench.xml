@@ -24,6 +24,7 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -42,13 +43,13 @@
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CopierTest.java" partName="CopierTest.java" path="D:/da documents/development/copyAssistant/CopyAssistant/test/com/sgnn7/cpassistant/CopierTest.java" title="CopierTest.java" tooltip="CopyAssistant/test/com/sgnn7/cpassistant/CopierTest.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CopierTest.java" partName="CopierTest.java" path="D:/da documents/development/copyAssistant/CopyAssistant/test/com/sgnn7/cpassistant/CopierTest.java" title="CopierTest.java" tooltip="CopyAssistant/test/com/sgnn7/cpassistant/CopierTest.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/CopyAssistant/test/com/sgnn7/cpassistant/CopierTest.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="362" selectionOffset="1435" selectionTopPixel="311"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4464" selectionTopPixel="511"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Copier.java" partName="Copier.java" path="D:/da documents/development/copyAssistant/CopyAssistant/src/com/sgnn7/cpassistant/Copier.java" title="Copier.java" tooltip="CopyAssistant/src/com/sgnn7/cpassistant/Copier.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Copier.java" partName="Copier.java" path="D:/da documents/development/copyAssistant/CopyAssistant/src/com/sgnn7/cpassistant/Copier.java" title="Copier.java" tooltip="CopyAssistant/src/com/sgnn7/cpassistant/Copier.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/CopyAssistant/src/com/sgnn7/cpassistant/Copier.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2138" selectionTopPixel="743"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5154" selectionTopPixel="2228"/>
 </editor>
 </editors>
 <views>
@@ -80,7 +81,9 @@
 <view id="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" partName="Data Source Explorer"/>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>&#x0A;<category IMemento.internal.id="Errors"/>
+<expanded>
+<category IMemento.internal.id="Warnings"/>
+<category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -349,8 +352,8 @@
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info part="org.eclipse.gef.ui.palette_view" ratio="0.25" ratioLeft="478" ratioRight="1434" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.82832617" ratioLeft="772" ratioRight="160" relationship="4" relative="org.eclipse.gef.ui.palette_view">
+<info part="org.eclipse.gef.ui.palette_view" ratio="0.19381875" ratioLeft="370" ratioRight="1539" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.66845495" ratioLeft="623" ratioRight="309" relationship="4" relative="org.eclipse.gef.ui.palette_view">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
@@ -397,159 +400,160 @@
 <workingSets/>
 <navigationHistory>
 <editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/CopyAssistant/test/com/sgnn7/cpassistant/CopierTest.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/CopyAssistant/src/com/sgnn7/cpassistant/Copier.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/CopyAssistant/test/com/sgnn7/cpassistant/CopierTest.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/CopyAssistant/test/com/sgnn7/cpassistant/CopierTest.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/CopyAssistant/src/com/sgnn7/cpassistant/CopierManager.java"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=CopyAssistant/lib\/commons-io-1.4.jar&lt;org.apache.commons.io(FileUtils.class"/>
 </editors>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="3155" y="0"/>
+<item historyLabel="Copier.java" index="1">
+<position info="not_deleted" x="3434" y="0"/>
 </item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="849" y="9"/>
-</item>
-<item historyLabel="CopierTest.java" index="1">
+<item historyLabel="CopierTest.java" index="0">
 <position/>
 </item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="919" y="9"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="3123" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
+<item historyLabel="Copier.java" index="1">
 <position/>
 </item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="3123" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
+<item historyLabel="Copier.java" index="1">
 <position/>
 </item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="2887" y="0"/>
+<item historyLabel="Copier.java" index="1">
+<position info="not_deleted" x="3497" y="0"/>
 </item>
-<item historyLabel="CopierTest.java" index="1">
-<position info="not_deleted" x="1039" y="0"/>
-</item>
-<item historyLabel="CopierTest.java" index="1">
+<item historyLabel="CopierTest.java" index="0">
 <position/>
 </item>
-<item historyLabel="CopierTest.java" index="1">
-<position info="not_deleted" x="553" y="5"/>
+<item historyLabel="Copier.java" index="1">
+<position/>
 </item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="2887" y="0"/>
+<item historyLabel="CopierManager.java" index="2">
+<position/>
 </item>
-<item historyLabel="Copier.java" index="0">
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="3662" y="366"/>
+</item>
+<item historyLabel="CopierManager.java" index="2">
+<position/>
+</item>
+<item historyLabel="Copier.java" index="1">
+<position info="not_deleted" x="5345" y="0"/>
+</item>
+<item historyLabel="Copier.java" index="1">
+<position info="not_deleted" x="5454" y="0"/>
+</item>
+<item historyLabel="Copier.java" index="1">
+<position info="not_deleted" x="5419" y="0"/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="Copier.java" index="1">
+<position/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="3312" y="0"/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="1839" y="6"/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="CopierManager.java" index="2">
+<position info="not_deleted" x="66" y="0"/>
+</item>
+<item historyLabel="Copier.java" index="1">
+<position/>
+</item>
+<item historyLabel="Copier.java" index="1">
+<position/>
+</item>
+<item historyLabel="Copier.java" index="1">
+<position info="not_deleted" x="1207" y="0"/>
+</item>
+<item historyLabel="Copier.java" index="1">
 <position info="not_deleted" x="800" y="0"/>
 </item>
-<item historyLabel="Copier.java" index="0">
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position/>
+</item>
+<item historyLabel="FileUtils.class" index="3">
+<position info="not_deleted" x="11958" y="9"/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="1798" y="0"/>
+</item>
+<item historyLabel="FileUtils.class" index="3">
+<position info="not_deleted" x="15277" y="9"/>
+</item>
+<item historyLabel="FileUtils.class" index="3">
+<position info="not_deleted" x="15632" y="0"/>
+</item>
+<item historyLabel="FileUtils.class" index="3">
+<position info="not_deleted" x="11958" y="9"/>
+</item>
+<item historyLabel="FileUtils.class" index="3">
+<position info="not_deleted" x="12949" y="0"/>
+</item>
+<item historyLabel="FileUtils.class" index="3">
+<position info="not_deleted" x="10108" y="14"/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="1979" y="4"/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="2034" y="0"/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="1989" y="0"/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="2072" y="0"/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="2106" y="0"/>
+</item>
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="4464" y="0"/>
+</item>
+<item historyLabel="Copier.java" index="1">
 <position info="not_deleted" x="800" y="0"/>
 </item>
-<item historyLabel="CopierTest.java" index="1">
-<position info="not_deleted" x="823" y="23"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="800" y="0"/>
-</item>
-<item historyLabel="CopierTest.java" index="1">
-<position info="not_deleted" x="823" y="23"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="800" y="0"/>
-</item>
-<item historyLabel="CopierTest.java" index="1">
-<position info="not_deleted" x="1291" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="800" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="643" y="0"/>
-</item>
-<item historyLabel="CopierTest.java" index="1">
-<position info="not_deleted" x="1054" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="643" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="2004" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
+<item historyLabel="Copier.java" index="1">
 <position/>
 </item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="2174" y="0"/>
+<item historyLabel="Copier.java" index="1">
+<position info="not_deleted" x="2991" y="0"/>
 </item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="2791" y="0"/>
+<item historyLabel="CopierTest.java" index="0">
+<position info="not_deleted" x="4464" y="0"/>
 </item>
-<item historyLabel="CopierTest.java" index="1">
-<position info="not_deleted" x="1239" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="2986" y="0"/>
-</item>
-<item historyLabel="CopierTest.java" index="1">
-<position info="not_deleted" x="1217" y="24"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="2986" y="0"/>
-</item>
-<item historyLabel="CopierTest.java" index="2">
-<position info="not_deleted" x="1270" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
+<item active="true" historyLabel="Copier.java" index="1">
 <position/>
-</item>
-<item historyLabel="CopierTest.java" index="2">
-<position info="not_deleted" x="1308" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="1565" y="0"/>
-</item>
-<item historyLabel="CopierTest.java" index="2">
-<position info="not_deleted" x="1308" y="0"/>
-</item>
-<item historyLabel="CopierTest.java" index="2">
-<position info="not_deleted" x="1291" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="1565" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="3563" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="3578" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="3751" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="2193" y="0"/>
-</item>
-<item historyLabel="CopierTest.java" index="2">
-<position info="not_deleted" x="1000" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="2193" y="0"/>
-</item>
-<item historyLabel="Copier.java" index="0">
-<position info="not_deleted" x="2138" y="0"/>
-</item>
-<item active="true" historyLabel="CopierTest.java" index="2">
-<position info="not_deleted" x="1000" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -568,6 +572,18 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="FileUtils.class" tooltip="org.apache.commons.io.FileUtils">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=CopyAssistant/lib\/commons-io-1.4.jar&lt;org.apache.commons.io(FileUtils.class"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CopierManager.java" tooltip="CopyAssistant/src/com/sgnn7/cpassistant/CopierManager.java">
+<persistable path="/CopyAssistant/src/com/sgnn7/cpassistant/CopierManager.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="mockito-all-1.8.5.jar" tooltip="CopyAssistant/lib/mockito-all-1.8.5.jar">
+<persistable path="/CopyAssistant/lib/mockito-all-1.8.5.jar"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="commons-io-1.4.jar" tooltip="CopyAssistant/lib/commons-io-1.4.jar">
+<persistable path="/CopyAssistant/lib/commons-io-1.4.jar"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="abc.txt" tooltip="CopyAssistant/test-data/data/blah/abc.txt">
 <persistable path="/CopyAssistant/test-data/data/blah/abc.txt"/>
 </file>
