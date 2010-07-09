@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testrun name="test" project="CopyAssistant" tests="6" started="6" failures="0" errors="0" ignored="0">
+  <testsuite name="com.sgnn7.cpassistant.CopierTest" time="0.043">
+    <testcase name="folderThatIsAddedGetsExpandedToIncludeAllFiles" classname="com.sgnn7.cpassistant.CopierTest" time="0.006"/>
+    <testcase name="invokingCopyCopiesAllFilesToTarget" classname="com.sgnn7.cpassistant.CopierTest" time="0.012"/>
+    <testcase name="allFilesAreCopiedToTargetExactly" classname="com.sgnn7.cpassistant.CopierTest" time="0.014"/>
+    <testcase name="invokingCopyWithABadFileCopiesAllFilesToTargetAndReturnsFailedOnes" classname="com.sgnn7.cpassistant.CopierTest" time="0.005"/>
+    <testcase name="invokingCopyWithABadFolderDoesNotTryToCopyFilesIntoThatFolder" classname="com.sgnn7.cpassistant.CopierTest" time="0.005"/>
+    <testcase name="invokingCopyWithTooSmallDestinationThrowsRuntimeException" classname="com.sgnn7.cpassistant.CopierTest" time="0.001"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,30 @@
+package com.sgnn7.cpassistant;
+
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class CopierTest {
+	private Copier testObject;
+
+	@Before
+	public void setup(){
+		testObject = new Copier();
+	}
+	
+	@Test
+	public void folderThatIsAddedGetsExpandedToIncludeAllFiles(){
+		testObject.setSources(Arrays.asList("data"));
+		List<String> fileObjects = testObject.getItemsFromSources();
+		assertEquals(8, fileObjects.size());
+	}
+	
+	@Test
+	public void stuff(){
+		
+	}
+}

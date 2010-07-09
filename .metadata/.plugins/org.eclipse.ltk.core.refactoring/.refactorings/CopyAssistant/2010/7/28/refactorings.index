@@ -1,0 +1,23 @@
+1278205114969	Rename field 'overwriteFiles'
+1278632963356	Rename field 'filename'
+1278632993247	Rename field 'exception'
+1278633316763	Extract local variable 'exception'
+1278634584287	Rename field 'failureFilename'
+1278634601115	Rename local variable 'filename'
+1278635226662	Extract constant 'DATA'
+1278637309105	Move file
+1278637318250	Rename resource 'LICENSE.txt'
+1278637447602	Copy folder
+1278637454530	Rename field 'TARGET_STAGING_DIR'
+1278637458903	Extract constant 'TEST_DATA'
+1278637577613	Extract method 'cleanTempDirectories'
+1278638545929	Extract method 'extracted'
+1278638591161	Rename method 'fileItemsInDirectory'
+1278638651829	Rename method 'getFileItemsInDirectory'
+1278638742669	Rename method 'assertDestinationExists'
+1278641024439	Rename local variable 'sourceSize'
+1278641166541	Encapsulate field 'canHoldAllFiles'
+1278644075719	Delete element
+1278644166526	Rename method 'getItemsFromSources'
+1278644298928	Rename method 'assertDirectoryExists'
+1278644313526	Rename method 'sourceFileIsNotInFailedFolder'

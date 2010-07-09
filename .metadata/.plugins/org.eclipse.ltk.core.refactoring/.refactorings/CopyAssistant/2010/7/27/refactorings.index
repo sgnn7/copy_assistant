@@ -1,0 +1,5 @@
+1278036538340	Rename local variable 'sourceFiles'
+1278038416940	Extract local variable 'out'
+1278038571625	Extract local variable 'string'
+1278039760890	Extract local variable 'd'
+1278040927646	Extract local variable 'path'

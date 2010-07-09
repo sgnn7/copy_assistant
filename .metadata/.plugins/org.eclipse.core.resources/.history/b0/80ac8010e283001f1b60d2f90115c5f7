@@ -1,0 +1,10 @@
+package com.sgnn7.cpassistant;
+
+import org.junit.Test;
+
+public class CopierTest {
+	@Test
+	public void test(){
+		
+	}
+}

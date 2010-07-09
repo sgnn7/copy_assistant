@@ -1,0 +1,8 @@
+package com.sgnn7.cpassistant;
+
+public class CopierTest {
+	@Test
+	public void test(){
+		
+	}
+}

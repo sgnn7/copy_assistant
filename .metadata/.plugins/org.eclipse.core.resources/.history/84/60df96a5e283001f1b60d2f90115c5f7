@@ -1,0 +1,20 @@
+package com.sgnn7.cpassistant;
+
+import java.util.Arrays;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class CopierTest {
+	private Copier testObject;
+
+	@Before
+	public void setup(){
+		testObject = new Copier();
+	}
+	
+	@Test
+	public void folderThatIsAddedGetsExpandedToIncludeAllFiles(){
+		testObject.setSources(Arrays.asList("data"));
+	}
+}

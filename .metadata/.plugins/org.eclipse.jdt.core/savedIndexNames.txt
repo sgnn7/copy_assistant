@@ -1,0 +1,15 @@
+INDEX VERSION 1.126+D:\da documents\development\copyAssistant\.metadata\.plugins\org.eclipse.jdt.core
+989118166.index
+1468816283.index
+2479909925.index
+529437705.index
+3140045379.index
+1962638457.index
+3291799386.index
+2713252416.index
+4284093014.index
+2375370348.index
+2354470010.index
+3055948094.index
+4050959524.index
+848959954.index

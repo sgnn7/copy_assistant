@@ -1,0 +1,97 @@
+package com.sgnn7.cpassistant;
+
+import static org.junit.Assert.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class CopierTest {
+	private Copier testObject;
+	private MockCopier mockTestObject;
+
+	@Before
+	public void setup() {
+		testObject = new Copier();
+		testObject.setSources(Arrays.asList("data"));
+		testObject.setOverwriteFilesEnabled(true);
+
+		mockTestObject = new MockCopier();
+		mockTestObject.setSources(Arrays.asList("data"));
+		mockTestObject.setOverwriteFilesEnabled(true);
+
+	}
+
+	@Test
+	public void folderThatIsAddedGetsExpandedToIncludeAllFiles() {
+		List<String> fileObjects = testObject.getItemsFromSources();
+		assertEquals(8, fileObjects.size());
+	}
+
+	@Test
+	public void invokingCopyCopiesAllFilesToTarget() throws Exception {
+		String testOutputDirectory = "test-data";
+		deleteDirectory(testOutputDirectory);
+		testObject.setDestination(testOutputDirectory);
+		boolean result = testObject.beginCopying();
+		assertTrue(result);
+		testObject.setSources(Arrays.asList("data"));
+		assertEquals(8, testObject.getItemsFromSources().size());
+	}
+
+	@Test
+	public void invokingCopyWithABadFileCopiesAllFilesToTargetButReturnsFailure() throws Exception {
+		String testOutputDirectory = "test-data";
+		deleteDirectory(testOutputDirectory);
+		mockTestObject.setDestination(testOutputDirectory);
+		
+		IOException exception = new IOException("stuffs");
+		mockTestObject.failOnFile("abc.txt", exception);
+		
+		boolean result = testObject.beginCopying();
+		assertFalse(result);
+		
+		testObject.setSources(Arrays.asList("data"));
+		assertEquals(8, testObject.getItemsFromSources().size());
+	}
+
+//	@Test
+//	public void copyCrap() throws Exception {
+//		testObject.setSources(Arrays.asList("D:\\mp3"));
+//		String testOutputDirectory = "Z:\\";
+//		testObject.setDestination(testOutputDirectory);
+//		boolean result = testObject.beginCopying(true);
+//		try {
+//			assertTrue(result);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+
+	private void deleteDirectory(String testOutputDirectory) {
+		File directory = new File(testOutputDirectory);
+		directory.delete();
+	}
+	
+	private class MockCopier extends Copier {
+		private String failureFilename;
+		private IOException failureException;
+
+		void failOnFile(String filename, IOException exception){
+			this.failureFilename = filename;
+			this.failureException = exception;
+			
+		}
+		
+		@Override
+		void copyFile(File in, File out) throws IOException {
+			if(in.getName().equals(failureFilename)){
+				throw failureException;
+			}
+		}
+	}
+}
