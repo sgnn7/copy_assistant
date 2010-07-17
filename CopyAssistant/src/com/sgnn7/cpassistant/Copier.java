@@ -1,46 +1,32 @@
 package com.sgnn7.cpassistant;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import com.sgnn7.cpassistant.copyimpl.ICopyImplementation;
+
 public class Copier {
 	private List<String> sources;
 	private String destination;
 	private boolean overwriteFilesEnabled;
+	private final ICopyImplementation copyImplementation;
+	private VolumeInfoProvider volumeInfoProvider;
+	private final FolderOperationHandler folderOperationHandler;
+
+	public Copier(ICopyImplementation copyImplementation, FolderOperationHandler folderOperationHandler,
+			VolumeInfoProvider volumeInfoProvider) {
+		this.copyImplementation = copyImplementation;
+		this.folderOperationHandler = folderOperationHandler;
+		this.volumeInfoProvider = volumeInfoProvider;
+	}
 
 	public void setSources(List<String> sources) {
 		this.sources = sources;
-	}
-
-	public List<String> getFilesFromSources() {
-		List<String> fileList = new ArrayList<String>(100);
-		for (String source : sources) {
-			fileList.addAll(getDirectoryTree(source));
-		}
-		return fileList;
-	}
-
-	private List<String> getDirectoryTree(String source) {
-		List<String> fileList = new ArrayList<String>();
-		fileList.add(source);
-
-		for (File currentSource : new File(source).listFiles()) {
-			if (currentSource.isFile()) {
-				fileList.add(currentSource.getPath());
-			} else if (currentSource.isDirectory()) {
-				List<String> directoryTree = getDirectoryTree(currentSource.getPath());
-				fileList.addAll(directoryTree);
-			}
-		}
-		return fileList;
 	}
 
 	public List<String> beginCopying() throws IOException {
@@ -49,16 +35,16 @@ public class Copier {
 			throw new RuntimeException("Invalid parameters set");
 		}
 
-		makeDirectoryIfNotExists(destination);
+		folderOperationHandler.makeDirectoryIfNotExists(new File(destination));
 
-		List<String> sourceFilenames = getFilesFromSources();
+		List<String> sourceFilenames = new FileFinder().getFilesFromSources(sources.toArray(new String[0]));
 		List<String> failedFiles = new ArrayList<String>();
 
 		long startingTime = System.currentTimeMillis();
 		int totalFiles = sourceFilenames.size();
 		BigDecimal totalFileSize = getFileSizes(sourceFilenames);
 
-		if (!targetCanHoldAllFiles(destination, totalFileSize.longValue())) {
+		if (!volumeInfoProvider.targetCanHoldAllFiles(new File(destination), totalFileSize.longValue())) {
 			throw new RuntimeException("Target too small");
 		}
 
@@ -77,9 +63,9 @@ public class Copier {
 			if (!sourceFile.exists() || overwriteFilesEnabled) {
 				try {
 					if (sourceFile.isFile() && sourceFileIsNotInAFailedFolder(sourceFile, failedFiles)) {
-						copyFile(sourceFile, targetFile);
+						copyImplementation.copyFile(sourceFile, targetFile);
 					} else if (sourceFile.isDirectory()) {
-						makeDirectoryIfNotExists(new File(destination, path).getPath());
+						folderOperationHandler.makeDirectoryIfNotExists(new File(destination, path));
 					}
 				} catch (IOException e) {
 					// e.printStackTrace();
@@ -125,37 +111,6 @@ public class Copier {
 			}
 		}
 		return totalSize;
-	}
-
-	void makeDirectoryIfNotExists(String destinationDirectory) throws IOException {
-		File directory = new File(destinationDirectory);
-		if (!directory.exists()) {
-			directory.mkdirs();
-		}
-	}
-
-	void copyFile(File in, File out) throws IOException {
-		if (!in.exists())
-			in.createNewFile();
-
-		FileChannel inChannel = new FileInputStream(in).getChannel();
-		FileChannel outChannel = new FileOutputStream(out).getChannel();
-		try {
-			inChannel.transferTo(0, inChannel.size(), outChannel);
-		} catch (IOException e) {
-			throw e;
-		} finally {
-			if (inChannel != null)
-				inChannel.close();
-			if (outChannel != null)
-				outChannel.close();
-		}
-	}
-
-	boolean targetCanHoldAllFiles(String destinationPath, long sourcesSize) {
-		File target = new File(destinationPath);
-		long usableSpace = target.getUsableSpace();
-		return usableSpace >= sourcesSize;
 	}
 
 	public void setDestination(String destination) {

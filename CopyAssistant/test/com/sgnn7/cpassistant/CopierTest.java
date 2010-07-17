@@ -1,107 +1,92 @@
 package com.sgnn7.cpassistant;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import com.sgnn7.cpassistant.copyimpl.ICopyImplementation;
 
 public class CopierTest {
-	private static final String TARGET_STAGING_DIR = "test-data";
-	private static final String SOURCE_STAGING_DIR = "data";
 	private Copier testObject;
-	private MockCopier mockTestObject;
+
+	@Mock
+	private ICopyImplementation mockCopyImpl;
+
+	@Mock
+	private VolumeInfoProvider mockVolumeInfoProvider;
+	@Mock
+	private FolderOperationHandler mockFolderOperationHandler;
 
 	@Before
 	public void setup() throws IOException {
-		cleanTempDirectories();
+		MockitoAnnotations.initMocks(this);
 
-		testObject = new Copier();
-		testObject.setSources(Arrays.asList(SOURCE_STAGING_DIR));
+		CopierTestUtils.cleanTempDirectories();
+
+		testObject = new Copier(mockCopyImpl, mockFolderOperationHandler, mockVolumeInfoProvider);
+		testObject.setSources(Arrays.asList(CopierTestConstants.SOURCE_STAGING_DIR));
 		testObject.setOverwriteFilesEnabled(true);
 
-		mockTestObject = new MockCopier();
-		mockTestObject.setSources(Arrays.asList(SOURCE_STAGING_DIR));
-		mockTestObject.setOverwriteFilesEnabled(true);
+		doReturn(true).when(mockVolumeInfoProvider).targetCanHoldAllFiles(any(File.class), anyLong());
 	}
 
 	@After
 	public void clean() throws IOException {
-		cleanTempDirectories();
-	}
-
-	@Test
-	public void folderThatIsAddedGetsExpandedToIncludeAllFiles() {
-		List<String> fileObjects = testObject.getFilesFromSources();
-		assertEquals(8, fileObjects.size());
-	}
-
-	@Test
-	public void invokingCopyCopiesAllFilesToTarget() throws Exception {
-		testObject.setDestination(TARGET_STAGING_DIR);
-		List<String> result = testObject.beginCopying();
-		assertEquals(0, result.size());
-
-		testObject.setSources(Arrays.asList(TARGET_STAGING_DIR));
-		assertEquals(9, getFileItemsInTargetDirectory());
-	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	public void allFilesAreCopiedToTargetExactly() throws Exception {
-		testObject.setDestination(TARGET_STAGING_DIR);
-		List<String> result = testObject.beginCopying();
-		assertEquals(0, result.size());
-
-		File[] sourceFiles = (File[]) FileUtils.listFiles(new File(SOURCE_STAGING_DIR), null, true)
-				.toArray(new File[0]);
-		File[] targetFiles = (File[]) FileUtils.listFiles(new File(TARGET_STAGING_DIR), null, true)
-				.toArray(new File[0]);
-		for (int i = 0; i < sourceFiles.length; i++) {
-			assertTrue(FileUtils.contentEquals(sourceFiles[i], targetFiles[i]));
-		}
+		CopierTestUtils.cleanTempDirectories();
 	}
 
 	@Test
 	public void invokingCopyWithABadFileCopiesAllFilesToTargetAndReturnsFailedOnes() throws Exception {
-		mockTestObject.setDestination(TARGET_STAGING_DIR);
+		testObject.setDestination(CopierTestConstants.TARGET_STAGING_DIR);
 
-		IOException exception = new IOException("stuffs");
-		mockTestObject.failOnFile(Arrays.asList("data\\blah\\abc.txt", "data\\test"), exception);
+		List<String> exceptionThrowingList = Arrays.asList(CopierTestUtils.joinPath("data", "blah", "abc.txt"),
+				CopierTestUtils.joinPath(CopierTestConstants.TARGET_STAGING_DIR, "data", "test"));
+		doThrow(new IOException()).when(mockCopyImpl).copyFile(argThat(new FileMatcher(exceptionThrowingList)),
+				any(File.class));
+		doThrow(new IOException()).when(mockFolderOperationHandler).makeDirectoryIfNotExists(
+				argThat(new FileMatcher(exceptionThrowingList)));
 
-		List<String> result = mockTestObject.beginCopying();
+		List<String> result = testObject.beginCopying();
 		assertEquals(2, result.size());
-
-		assertEquals(7, getFileItemsInTargetDirectory());
 	}
 
 	@Test
 	public void invokingCopyWithABadFolderDoesNotTryToCopyFilesIntoThatFolder() throws Exception {
-		mockTestObject.setDestination(TARGET_STAGING_DIR);
+		testObject.setDestination(CopierTestConstants.TARGET_STAGING_DIR);
 
-		IOException exception = new IOException("stuffs");
-		mockTestObject.failOnFile(Arrays.asList("data\\blah"), exception);
-		mockTestObject.assertCopyIsNotInvokedOnPaths(Arrays.asList("data\\blah\\abc.txt"));
+		List<String> exceptionThrowingList = Arrays.asList(CopierTestUtils.joinPath(
+				CopierTestConstants.TARGET_STAGING_DIR, "data", "blah"));
+		List<String> assertionList = Arrays.asList(CopierTestUtils.joinPath("data", "blah", "abc.txt"));
 
-		List<String> result = mockTestObject.beginCopying();
+		doThrow(new IOException()).when(mockFolderOperationHandler).makeDirectoryIfNotExists(
+				argThat(new FileMatcher(exceptionThrowingList)));
+		verify(mockCopyImpl, never()).copyFile(argThat(new FileMatcher(assertionList)), any(File.class));
+
+		List<String> result = testObject.beginCopying();
 		assertEquals(2, result.size());
-
-		assertEquals(7, getFileItemsInTargetDirectory());
 	}
 
 	@Test
 	public void invokingCopyWithTooSmallDestinationThrowsRuntimeException() throws Exception {
-		mockTestObject.setDestination(TARGET_STAGING_DIR);
-		mockTestObject.setCanHoldAllFiles(false);
+		testObject.setDestination(CopierTestConstants.TARGET_STAGING_DIR);
+
+		doReturn(false).when(mockVolumeInfoProvider).targetCanHoldAllFiles(any(File.class), anyLong());
 
 		try {
-			mockTestObject.beginCopying();
+			testObject.beginCopying();
 		} catch (RuntimeException e) {
 			// Pass
 		} catch (Exception e) {
@@ -109,77 +94,44 @@ public class CopierTest {
 		}
 	}
 
-	private int getFileItemsInTargetDirectory() {
-		testObject.setSources(Arrays.asList(TARGET_STAGING_DIR));
-		return testObject.getFilesFromSources().size();
-	}
-
 	// @Test
 	// public void copyMyFiles() throws Exception {
-	// testObject.setSources(Arrays.asList("D:\\mp3"));
+	// testObject.setSources(Arrays.asList("D:\\"));
 	// String testOutputDirectory = "Z:\\";
 	// testObject.setDestination(testOutputDirectory);
-	// boolean result = testObject.beginCopying(true);
-	// try {
-	// assertTrue(result);
-	// } catch (Exception e) {
-	// e.printStackTrace();
+	// List<String> result = testObject.beginCopying();
+	//
+	// for (String file : result) {
+	// System.err.println("Failed: " + file);
 	// }
 	// }
 
-	private class MockCopier extends Copier {
-		private List<String> failureFilenames;
-		private IOException failureException;
-		private List<String> assertionFiles;
-		private boolean canHoldAllFiles = true;
+	private class FileMatcher extends BaseMatcher<File> {
+		private final List<String> exceptions;
 
-		void failOnFile(List<String> filenames, IOException exception) {
-			this.failureFilenames = filenames;
-			this.failureException = exception;
-		}
-
-		void assertCopyIsNotInvokedOnPaths(List<String> assertionFiles) {
-			this.assertionFiles = assertionFiles;
+		public FileMatcher(List<String> exceptions) {
+			this.exceptions = exceptions;
 		}
 
 		@Override
-		void copyFile(File in, File out) throws IOException {
-			if (assertionFiles != null) {
-				for (String assertionFilename : assertionFiles) {
-					if (in.getPath().endsWith(assertionFilename)) {
-						fail("File '" + assertionFilename + "' should not have been copied");
-					}
+		public boolean matches(Object object) {
+			if (!(object instanceof File))
+				return false;
+			File testFile = (File) object;
+
+			// System.err.println("Path: " + testFile.getPath());
+			for (String filename : exceptions) {
+				// System.err.println(" Checking: " + filename);
+				if (filename.equals(testFile.getPath())) {
+					return true;
 				}
 			}
 
-			if (failureFilenames.contains(in.getPath())) {
-				throw failureException;
-			}
-			super.copyFile(in, out);
+			return false;
 		}
 
 		@Override
-		void makeDirectoryIfNotExists(String destinationDirectory) throws IOException {
-			for (String failureFilename : failureFilenames) {
-				if (destinationDirectory.endsWith(failureFilename)) {
-					throw failureException;
-				}
-			}
-			super.makeDirectoryIfNotExists(destinationDirectory);
+		public void describeTo(Description arg0) {
 		}
-
-		@Override
-		boolean targetCanHoldAllFiles(String destinationPath, long sourcesSize) {
-			return canHoldAllFiles;
-		}
-
-		public void setCanHoldAllFiles(boolean canHoldAllFiles) {
-			this.canHoldAllFiles = canHoldAllFiles;
-		}
-	}
-
-	private void cleanTempDirectories() throws IOException {
-		File stagingDir = new File(TARGET_STAGING_DIR);
-		FileUtils.deleteDirectory(stagingDir);
 	}
 }
