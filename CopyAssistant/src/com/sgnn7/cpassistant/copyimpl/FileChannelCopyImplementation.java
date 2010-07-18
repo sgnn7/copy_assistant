@@ -6,11 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
+import org.apache.commons.io.FileUtils;
+
 public class FileChannelCopyImplementation implements ICopyImplementation {
 	final static int BUFFER_SIZE = (int) Math.pow(2, 16);
 
 	static {
-		System.err.println("Buffer size: " + BUFFER_SIZE);
+		System.err.println("Buffer size: " + FileUtils.byteCountToDisplaySize(BUFFER_SIZE));
 	}
 
 	@Override
