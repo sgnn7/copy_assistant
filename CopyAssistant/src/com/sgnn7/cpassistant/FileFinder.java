@@ -18,12 +18,16 @@ public class FileFinder {
 		List<String> fileList = new ArrayList<String>();
 		fileList.add(source);
 
-		for (File currentSource : new File(source).listFiles()) {
-			if (currentSource.isFile()) {
-				fileList.add(currentSource.getPath());
-			} else if (currentSource.isDirectory()) {
-				List<String> directoryTree = getDirectoryTree(currentSource.getPath());
-				fileList.addAll(directoryTree);
+		File sourceFile = new File(source);
+
+		if (!sourceFile.isFile()) {
+			for (File currentSource : sourceFile.listFiles()) {
+				if (currentSource.isFile()) {
+					fileList.add(currentSource.getPath());
+				} else if (currentSource.isDirectory()) {
+					List<String> directoryTree = getDirectoryTree(currentSource.getPath());
+					fileList.addAll(directoryTree);
+				}
 			}
 		}
 		return fileList;

@@ -40,6 +40,9 @@ public class Copier {
 		List<String> sourceFilenames = new FileFinder().getFilesFromSources(sources.toArray(new String[0]));
 		List<String> failedFiles = new ArrayList<String>();
 
+		System.out.println("Sources: " + sourceFilenames);
+		System.out.println("Target: " + destination);
+
 		long startingTime = System.currentTimeMillis();
 		int totalFiles = sourceFilenames.size();
 		BigDecimal totalFileSize = getFileSizes(sourceFilenames);
@@ -55,7 +58,7 @@ public class Copier {
 
 			// XXX: could be better handled
 			String path = sourceFile.getPath();
-			if (path.charAt(1) == ':') {
+			if (path.charAt(1) == ':' && path.length() == 3) {
 				path = path.substring(3);
 			}
 

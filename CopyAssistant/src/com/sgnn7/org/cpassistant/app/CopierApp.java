@@ -12,7 +12,12 @@ public class CopierApp {
 	public static void main(String[] args) {
 		ICopierUiView view = new CopierUiView();
 		ICopierUiModel model = new CopierUiModel();
-		CopierUiPresenter presenter = new CopierUiPresenter(model, view);
-		presenter.show();
+		final CopierUiPresenter presenter = new CopierUiPresenter(model, view);
+
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				presenter.show();
+			}
+		});
 	}
 }
